@@ -29,7 +29,15 @@
                 例如
                 <tr><td>烤雞腿</td></tr>
                 -->
+                 <form method ="POST" action="AddOrderServlet">
+                 <%
+                      ArrayList list=(ArrayList)session.getAttribute("list");
+                for(int i=0; list!=null&& i<list.size();i++){
+                    String t=(String)list.get(i);
+                    out.println("<li>"+t+"</li>");
+                }
                 
+                %>
             </tbody>
         </table>
         <a href="checkout.jsp"><button>Checkout</button></a><br/>
@@ -37,5 +45,6 @@
         question 2 (10%)
         引用 /WEB-INF/footer.jsp
         -->
+    <include file="/WEB-INF/footer.jsp">
     </body>
 </html>

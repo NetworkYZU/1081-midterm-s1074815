@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import sun.security.pkcs11.wrapper.CK_SESSION_INFO;
 
 /**
  *
@@ -38,10 +39,32 @@ public class AddOrderServlet extends HttpServlet {
         question 5 (30%)
         取得 session 物件，接收 user 傳來的 food 參數，
         將參數儲存到 session 物件裏面（你會需要將其儲存到一個 ArrayList 裏面，因爲會有多個 food）
-        
+        /
+      String food = request.getParameter("food");
+        HttpSession session = request.getSession();
+        ArrayList list = (ArrayList) session.getAttribute("list");
+
+        if (list == null) {
+            list = new ArrayList();
+            session.setAttribute("list", list);
+        }
+        list.add(food);
+
         question 6 (10%)
         最後外轉址到 list.jsp
-        */
+        
+         */
+        String food = request.getParameter("food");
+        HttpSession session = request.getSession();
+        ArrayList list = (ArrayList) session.getAttribute("list");
+
+        if (list == null) {
+            list = new ArrayList();
+            session.setAttribute("list", list);
+        }
+        list.add(food);
+
+        response.sendRedirect("list.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -83,4 +106,3 @@ public class AddOrderServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-}
